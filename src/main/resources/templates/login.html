@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <th:block th:replace="~{header}"/>
+</head>
+<body>
+
+<div class="container">
+
+  <!--/*@thymesVar id="dto" type="at.sayah.you_transfer.interfaces.login.dto.LoginDTO"*/-->
+  <form th:action="@{/login}" method="post" th:object="${dto}">
+    <div class="row">
+      <div class="col-lg-6">
+        <div class="mb-3">
+          <label for="web-id">Tell us your WebID</label>
+          <input class="form-control" type="text" placeholder="Your WebID" id="web-id" th:field="*{webId}" th:errorclass="is-invalid">
+          <p th:if="${#fields.hasErrors('webId')}" th:errorclass="invalid-feedback" th:errors="*{webId}"></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-6">
+        <h1>OR</h1>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-6">
+        <div class="mb-3">
+          <label for="openIdProvider-select">Select your OpenID Provider</label>
+          <select class="form-control" th:field="*{openIdProvider}" id="openIdProvider-select">
+            <option value=""></option>
+            <option th:each="OP : ${availableOPs}" th:value="${OP}" th:text="${OP}"></option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-1">
+        <button type="submit" class="btn btn-primary">Login</button>
+      </div>
+    </div>
+  </form>
+</div>
+
+</body>
+</html>

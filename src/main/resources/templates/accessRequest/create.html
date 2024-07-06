@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <th:block th:replace="~{header}"/>
+</head>
+<body>
+
+<div class="container">
+
+  <!--/*@thymesVar id="dto" type="at.sayah.you_transfer.interfaces.solid.dto.CreateAccessRequestDTO"*/-->
+  <form th:action="@{/pod/accessRequest(identifier=${identifier})}" method="post" th:object="${accessRequestDto}">
+    <div class="row">
+      <div class="col-lg-6">
+        <div class="mb-3">
+          <label for="web-id">Who's the recipient of the access request?</label>
+          <input class="form-control" type="text" placeholder="WebId of the recipient" id="web-id" th:field="*{webId}" th:errorclass="is-invalid">
+          <p th:if="${#fields.hasErrors('webId')}" th:errorclass="invalid-feedback" th:errors="*{webId}"></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-6">
+        <label for="resource-identifier">Which resource do u want to request access to?</label>
+        <input class="form-control" type="text" placeholder="ResourceId (E.g. https://storage.inrupt.com/1234/photos" id="resource-identifier" th:field="*{resourceIdentifier}" th:errorclass="is-invalid">
+        <p th:if="${#fields.hasErrors('resourceIdentifier')}" th:errorclass="invalid-feedback" th:errors="*{resourceIdentifier}"></p>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-6">
+        <div class="mb-3">
+          <label for="scope-select">What scope r u requesting? (select multiple)</label>
+          <select class="form-control" th:field="*{scopes}" id="scope-select" multiple>
+            <option th:each="scope : ${availableScopes}" th:value="${scope}" th:text="${scope}"></option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-1">
+        <button type="submit" class="btn btn-primary">Create</button>
+      </div>
+    </div>
+  </form>
+</div>
+
+</body>
+</html>

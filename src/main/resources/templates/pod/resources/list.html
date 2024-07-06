@@ -1,0 +1,239 @@
+<!doctype html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <th:block th:replace="~{header}"/>
+</head>
+<body>
+
+<div class="container">
+  <div class="row">
+    <div class="col-lg-6">
+      <h3 th:text="${identifier}"></h3>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-6">
+      <h4>Which collection do u want to upload photos?</h4>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-6">
+      <div class="list-group">
+        <a th:each="resource : ${resources}" class="list-group-item list-group-item-action"
+           th:href="@{/resources/detail(identifier=${resource},parentIdentifier=${identifier})}"
+           th:text="${resource}"></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-6">
+      <h5>Access requests</h5>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-6">
+
+      <!--/*@thymesVar id="accessRequest" type="at.sayah.you_transfer.interfaces.solid.dto.AccessRequestListDTO"*/-->
+      <div class="accordion" id="access-requests-accordion">
+        <div class="accordion-item" th:each="accessRequest, iter : ${accessRequests}" th:classappend="${accessRequest.isExpired() ? 'd-none': ''}">
+          <h2 class="accordion-header" th:id="'access-request-heading-' + ${iter.index}">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                    th:attr="data-bs-target='#access-request-collapse-' + ${iter.index},aria-controls='access-request-collapse-' + ${iter.index}"
+                    aria-expanded="false"
+                    th:text="${accessRequest.identifier}">
+            </button>
+          </h2>
+          <div th:id="'access-request-collapse-' + ${iter.index}"
+               class="accordion-collapse collapse"
+               th:attr="aria-labelledby='access-request-heading-' + ${iter.index}"
+               data-bs-parent="#access-requests-accordion">
+            <div class="accordion-body">
+
+              <div class="row">
+                <div class="col-sm-1">
+                  <strong>Creator</strong>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-1">
+                  <p th:text="${accessRequest.creator}"></p>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-sm-6">
+                  <strong>Issued at</strong>
+                </div>
+                <div class="col-sm-6">
+                  <strong>Expires at</strong>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-6">
+                  <p th:text="${#temporals.format(accessRequest.issuedAt, 'dd-MM-yyyy HH:mm:ss')}"></p>
+                </div>
+                <div class="col-sm-6">
+                  <p th:text="${#temporals.format(accessRequest.expiresAt, 'dd-MM-yyyy HH:mm:ss')}"></p>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-sm-4">
+                  <strong>Requested resources</strong>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-l-6">
+                  <div class="list-group">
+                    <div class="list-group-item" th:each="resource : ${accessRequest.resources}"
+                         th:text="${resource}">
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-sm-4">
+                  <strong>Modes</strong>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col">
+                  <div class="form-check" th:each="mode : ${accessRequest.modes}">
+                    <input class="form-check-input" type="checkbox" value="" th:id="'checkbox-' + ${mode}" disabled checked>
+                    <label class="form-check-label" th:for="'checkbox-' + ${mode}" th:text="${mode}"></label>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-sm-2">
+                  <form method="post"
+                        th:action="@{/pod/accessRequest/grant(identifier=${identifier},accessRequestIdentifier=${accessRequest.identifier})}">
+                    <button type="submit" class="btn btn-success">Grant</button>
+                  </form>
+                </div>
+                <div class="col-sm-2">
+                  <form method="post"
+                        th:action="@{/pod/accessRequest/deny(identifier=${identifier},accessRequestIdentifier=${accessRequest.identifier})}">
+                    <button type="submit" class="btn btn-danger">Deny</button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-6">
+      <h5>Access grants</h5>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-6">
+
+      <!--/*@thymesVar id="accessGrant" type="at.sayah.you_transfer.interfaces.solid.dto.AccessRequestListDTO"*/-->
+      <div class="accordion" id="access-grants-accordion">
+        <div class="accordion-item" th:each="accessGrant, iter : ${accessGrants}"  th:classappend="${accessGrant.isExpired() ? 'd-none': ''}">
+          <h2 class="accordion-header" th:id="'access-grant-heading-' + ${iter.index}">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                    th:attr="data-bs-target='#access-grant-collapse-' + ${iter.index},aria-controls='access-grant-collapse-' + ${iter.index}"
+                    aria-expanded="false"
+                    th:text="${accessGrant.identifier}">
+            </button>
+          </h2>
+          <div th:id="'access-grant-collapse-' + ${iter.index}"
+               class="accordion-collapse collapse"
+               th:attr="aria-labelledby='access-grant-heading-' + ${iter.index}"
+               data-bs-parent="#access-grants-accordion">
+            <div class="accordion-body">
+
+              <div class="row">
+                <div class="col-sm-1">
+                  <strong>Creator</strong>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-1">
+                  <p th:text="${accessGrant.creator}"></p>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-sm-6">
+                  <strong>Issued at</strong>
+                </div>
+                <div class="col-sm-6">
+                  <strong>Expires at</strong>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-6">
+                  <p th:text="${#temporals.format(accessGrant.issuedAt, 'dd-MM-yyyy HH:mm:ss')}"></p>
+                </div>
+                <div class="col-sm-6">
+                  <p th:text="${#temporals.format(accessGrant.expiresAt, 'dd-MM-yyyy HH:mm:ss')}"></p>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-sm-4">
+                  <strong>Granted resources</strong>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-l-6">
+                  <div class="list-group">
+                    <a class="list-group-item list-group-item-action"
+                       th:each="resource : ${accessGrant.resources}" th:text="${resource}"
+                       th:href="@{/resources/detail(parentIdentifier=${identifier},accessGrantIdentifier=${accessGrant.identifier},resourceIdentifier=${resource})}">
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-4">
+                  <strong>Modes</strong>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col">
+                  <div class="form-check" th:each="mode : ${accessGrant.modes}">
+                    <input class="form-check-input" type="checkbox" value="" th:id="'checkbox-' + ${mode}" disabled checked>
+                    <label class="form-check-label" th:for="'checkbox-' + ${mode}" th:text="${mode}"></label>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-sm-2">
+                  <form method="post"
+                        th:action="@{/pod/accessGrant/revoke(identifier=${identifier},accessGrantIdentifier=${accessGrant.identifier})}">
+                    <button type="submit" class="btn btn-danger">Revoke</button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-2">
+      <a th:href="@{/pod/accessRequest(identifier=${identifier})}" class="btn btn-primary">Create access request</a>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

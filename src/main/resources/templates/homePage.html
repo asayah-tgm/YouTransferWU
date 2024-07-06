@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <th:block th:replace="~{header}"/>
+</head>
+<body>
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-6">
+            <h1 th:text="'Hello ' + ${#authentication.name} + '. What would u like to do?'"></h1>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-6">
+            <h2>Please select a pod you want to use to upload photos to</h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="list-group">
+                <a th:each="storage : ${storages}" class="list-group-item list-group-item-action"
+                   th:href="@{/pod/detail(identifier=${storage})}"
+                th:text="${storage}"></a>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

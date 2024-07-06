@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <th:block th:replace="~{header}"/>
+</head>
+<body>
+
+<div class="container">
+
+  <!--/*@thymesVar id="dto" type="at.sayah.you_transfer.interfaces.login.dto.LoginDTO"*/-->
+  <form th:action="@{/login}" method="post" th:object="${dto}">
+    <div class="row">
+      <div class="col-lg-6">
+        <div class="mb-3">
+          <label for="openIdProvider-select">Select your OpenID Provider</label>
+          <select class="form-control" th:field="*{openIdProvider}" id="openIdProvider-select">
+            <option value=""></option>
+            <option th:each="OP : ${oidcIssuers}" th:value="${OP}" th:text="${OP}"></option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-1">
+        <button type="submit" class="btn btn-primary">Login</button>
+      </div>
+    </div>
+  </form>
+</div>
+
+</body>
+</html>

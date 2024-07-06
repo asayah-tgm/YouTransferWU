@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: you-transfer
+you-transfer:
+  public-url: "http://localhost:19999"
+
+logging:
+  level:
+    org:
+      springframework:
+        security:
+          oauth2: info
+          web.authentication: info
+server:
+  port: 19999

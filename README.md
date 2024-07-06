@@ -28,7 +28,7 @@ We initially followed the [Inrupt tutorial](https://docs.inrupt.com/developer-to
 
 Thus, we switched to using Java, where we had more success due to its greater flexibility and customization potential. We used [IntelliJ IDEA](https://www.jetbrains.com/idea/), a user-friendly IDE for Java (and Kotlin), to develop our application. We also used [Gradle](https://gradle.org/), an open-source build automation tool for software development useful for tasks such as compilation, testing and deployment.
 
-We went through quite a few iterations, looking at the [Inrupt documentation](https://docs.inrupt.com/developer-tools/java/client-libraries/) and found help in the [community forum](https://forum.solidproject.org/) where other people share about Solid projects they built. Consult the 'Resources' section to see some of these, or explore [our GitHub repository](https://github.com/asayah-tgm/YouTransfer).
+We went through quite a few iterations, looking at the [Inrupt documentation](https://docs.inrupt.com/developer-tools/java/client-libraries/) and found help in the [community forum](https://forum.solidproject.org/) where other people share about Solid projects they built. Consult the 'Resources' section to see some of these, or explore [our GitHub repository](https://github.com/asayah-tgm/YouTransferWU).
 
 ## Running our application - YouTransfer
 
@@ -36,7 +36,7 @@ Follow this process to launch the YouTransfer application.
 
 ### Prerequisites
 
-1. Retrieve the YouTransfer application `.jar` file by downloading it from [our GitHub repository under 'Releases'](https://github.com/asayah-tgm/YouTransfer/releases). Tip: the current file name should be `YouTransfer-V1.jar`.
+1. Retrieve the YouTransfer application `.jar` file by downloading it from [our GitHub repository under 'Releases'](https://github.com/asayah-tgm/YouTransferWU/releases/). Tip: the current file name should be `YouTransfer-V1.jar`.
 
 2. Check if Java version >=17 is installed by running `java -version` in your terminal. We recommend using Windows PowerShell for Windows or Terminal for macOS to follow along with this tutorial.
 
@@ -86,7 +86,7 @@ We thank Professor Dr. Sabrina Kirrane from the Vienna University of Economics a
 
 ## Resources
 
-- [Sayah, A. & Crozat, B. - YouTransfer (GitHub repository)](https://github.com/asayah-tgm/YouTransfer)
+- [Sayah, A. & Crozat, B. - YouTransfer (GitHub repository)](https://github.com/asayah-tgm/YouTransferWU)
 - [Why Solid?](https://noeldemartin.com/blog/why-solid): a great blogpost highlighting the advantages and inconvenients of using Solid.
 - [Getting started as a Solid developer](https://solidproject.org//developers/tutorials/getting-started)
 - [Inrupt - Getting started](https://docs.inrupt.com/developer-tools/javascript/client-libraries/tutorial/getting-started/)

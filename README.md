@@ -26,7 +26,7 @@ Once you have your Pod and credentials, the next step (in the developer's way) i
 
 We initially followed the [Inrupt tutorial](https://docs.inrupt.com/developer-tools/javascript/client-libraries/tutorial/getting-started/) to develop a Solid application in JavaScript. However, after a few iterations, we encountered limitations with the Solid JavaScript libraries, which provide higher-level modules that are not easily customizable.
 
-Thus, we switched to using Java, where we had more success due to its greater flexibility and customization potential. We used [IntelliJ IDEA](https://www.jetbrains.com/idea/), a user-friendly IDE for Java (and Kotlin), to develop our application. We also used [Gradle](https://gradle.org/), an open-source build automation tool for software development useful for tasks such as compilation, testing and deployment.
+Thus, we switched to using Java / Kotlin, where we had more success due to its greater flexibility and customization potential. We used [IntelliJ IDEA](https://www.jetbrains.com/idea/), a user-friendly IDE for Java / Kotlin, to develop our application. We also used [Gradle](https://gradle.org/), an open-source build automation tool for software development useful for tasks such as compilation, testing and deployment.
 
 We went through quite a few iterations, looking at the [Inrupt documentation](https://docs.inrupt.com/developer-tools/java/client-libraries/) and found help in the [community forum](https://forum.solidproject.org/) where other people share about Solid projects they built. Consult the 'Resources' section to see some of these, or explore [our GitHub repository](https://github.com/asayah-tgm/YouTransferWU).
 
